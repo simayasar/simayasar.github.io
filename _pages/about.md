@@ -5,38 +5,36 @@ author_profile: true
 redirect_from: 
   - /about/
   - /about.html
-layout: post
+
 
 ---
 
 
 ## Why Do General LLMs Fall Short?
 
-While general-purpose large language models (LLMs) have shown impressive performance on 
-natural language tasks, this success often does not carry over to technical domains such 
-as biology and chemistry. The core issue lies in their training data: these models are 
-typically trained on natural language corpora like Wikipedia, books, or news articles, 
-which lack the specialized syntax symbols, and structural representations found in 
-scientific data — such as protein sequences or SMILES formulas.
+While general-purpose large language models (LLMs) have shown impressive performance on natural language tasks, this success often does not carry over to technical domains such as biology and chemistry. The core issue lies in their training data: these models are typically trained on natural language corpora like Wikipedia, books, or news articles, which lack the specialized syntax, symbols, and structural representations found in scientific data — such as protein sequences or SMILES formulas.
 
-Moreover, tasks in these domains require more than just linguistic understanding; they demand 
-domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured
-inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
+Moreover, tasks in these domains require more than just linguistic understanding; they demand domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
 
-Tag-LLM addresses these limitations by proposing a modular and flexible approach that 
-enhances general-purpose LLMs for specialized tasks — without retraining them from 
-scratch or altering their core architecture.
+Tag-LLM addresses these limitations by proposing a modular and flexible approach that enhances general-purpose LLMs for specialized tasks — without retraining them from scratch or altering their core architecture.
 
 
-Why Does This Problem Matter?
-======
 
+## Why Does This Problem Matter?
 
 While general-purpose large language models (LLMs) perform well in natural language processing tasks, their performance degrades significantly when applied to specialized domains (biology, chemistry, medicine, etc.). The main reason for this is that these models are largely trained with natural language datasets. However, specialized formats such as protein sequences, DNA codes or SMILES representations of chemical compounds are structurally and symbolically quite different from natural language. Since such data is not adequately represented in the training process of general LLMs, the model fails to understand the context and make correct inferences.
 
 To fill this gap, models have been developed for specific domains, such as specialized LLMs trained for disease diagnosis systems, chemical synthesis prediction or drug discovery. However, these models are usually trained from scratch and require a huge amount of labeled data and computational resources. This makes for an approach that is both costly and unsustainable in terms of scalability. 
 
 This naturally leads to the question: Is there a way to adapt the powerful general-purpose LLMs we already have to specialized tasks without disrupting their internal structure or retraining them? Tag‑LLM offers a clear answer to this question. By placing “domain” and “function” tags at the input level, general LLMs can be directed toward different tasks and data types. This approach eliminates the need for retraining and enables these models to perform effectively across a much broader range of tasks.
+
+
+
+
+
+
+
+
 
 Getting started
 ======
