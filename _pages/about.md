@@ -7,10 +7,9 @@ redirect_from:
   - /about.html
 ---
 
+------
 
-
-Why Do General LLMs Fall Short?
-======
+## Why Do General LLMs Fall Short?
 
 While general-purpose large language models (LLMs) have shown impressive performance on natural language tasks, this success often does not carry over to technical domains such as biology and chemistry. The core issue lies in their training data: these models are typically trained on natural language corpora like Wikipedia, books, or news articles, which lack the specialized syntax, symbols, and structural representations found in scientific data — such as protein sequences or SMILES formulas.
 
@@ -21,6 +20,7 @@ Tag-LLM addresses these limitations by proposing a modular and flexible approach
 
 Why Does This Problem Matter?
 ======
+
 
 While general-purpose large language models (LLMs) perform well in natural language processing tasks, their performance degrades significantly when applied to specialized domains (biology, chemistry, medicine, etc.). The main reason for this is that these models are largely trained with natural language datasets. However, specialized formats such as protein sequences, DNA codes or SMILES representations of chemical compounds are structurally and symbolically quite different from natural language. Since such data is not adequately represented in the training process of general LLMs, the model fails to understand the context and make correct inferences.
 
