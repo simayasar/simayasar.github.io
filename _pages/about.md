@@ -5,6 +5,8 @@ author_profile: true
 redirect_from: 
   - /about/
   - /about.html
+layout: post
+
 ---
 
 
@@ -19,7 +21,7 @@ scientific data — such as protein sequences or SMILES formulas.
 
 Moreover, tasks in these domains require more than just linguistic understanding; they demand 
 domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured
- inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
+inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
 
 Tag-LLM addresses these limitations by proposing a modular and flexible approach that 
 enhances general-purpose LLMs for specialized tasks — without retraining them from 
