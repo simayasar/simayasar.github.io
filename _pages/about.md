@@ -7,15 +7,23 @@ redirect_from:
   - /about.html
 ---
 
-------
 
 ## Why Do General LLMs Fall Short?
 
-While general-purpose large language models (LLMs) have shown impressive performance on natural language tasks, this success often does not carry over to technical domains such as biology and chemistry. The core issue lies in their training data: these models are typically trained on natural language corpora like Wikipedia, books, or news articles, which lack the specialized syntax, symbols, and structural representations found in scientific data — such as protein sequences or SMILES formulas.
+While general-purpose large language models (LLMs) have shown impressive performance on 
+natural language tasks, this success often does not carry over to technical domains such 
+as biology and chemistry. The core issue lies in their training data: these models are 
+typically trained on natural language corpora like Wikipedia, books, or news articles, 
+which lack the specialized syntax symbols, and structural representations found in 
+scientific data — such as protein sequences or SMILES formulas.
 
-Moreover, tasks in these domains require more than just linguistic understanding; they demand domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
+Moreover, tasks in these domains require more than just linguistic understanding; they demand 
+domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured
+ inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
 
-Tag-LLM addresses these limitations by proposing a modular and flexible approach that enhances general-purpose LLMs for specialized tasks — without retraining them from scratch or altering their core architecture.
+Tag-LLM addresses these limitations by proposing a modular and flexible approach that 
+enhances general-purpose LLMs for specialized tasks — without retraining them from 
+scratch or altering their core architecture.
 
 
 Why Does This Problem Matter?
