@@ -16,7 +16,6 @@ These tags allow the model to understand what kind of data it is dealing with an
 
 
 ## Why Does This Problem Matter?
-
 While general-purpose large language models (LLMs) perform well in natural language processing tasks, their performance degrades significantly when applied to specialized domains (biology, chemistry, medicine, etc.). The main reason for this is that these models are largely trained with natural language datasets. However, specialized formats such as protein sequences, DNA codes or SMILES representations of chemical compounds are structurally and symbolically quite different from natural language. Since such data is not adequately represented in the training process of general LLMs, the model fails to understand the context and make correct inferences.
 
 To fill this gap, models have been developed for specific domains, such as specialized LLMs trained for disease diagnosis systems, chemical synthesis prediction or drug discovery. However, these models are usually trained from scratch and require a huge amount of labeled data and computational resources. This makes for an approach that is both costly and unsustainable in terms of scalability. 
@@ -31,6 +30,46 @@ Below, we will explore the basic building blocks of this method: how the tags ar
 
 ![](/images/tag_llm_method.png)
 
+## Soft Tag Structure
+One of the core components of Tag-LLM is its soft tagging mechanism. Instead of using hard-coded text tokens, tags are represented as learnable continuous embeddings. Each tag is essentially a special vector that encodes semantic information and is directly inserted into the model’s input embedding layer.
+
+There are two main types of tags:
+
+Domain Tags: Indicate the type of specialized data the model is processing. 
+For example:
+
+<Protein> → protein sequences
+
+<SMILES> → chemical compound representations
+
+Function Tags: Define the type of task the model should perform. 
+For example:
+
+<BA> → binding affinity prediction
+
+<CLS> → classification
+
+Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model.
+
+## Integration into Embedding
+The domain and function tags used in Tag-LLM are defined as learnable vectors (learnable embeddings), not as ordinary text tags. These tags are integrated directly into the embedding layer of the model. The aim is not to add new types of information to the model's vocabulary, but to condition task and domain knowledge into the model via the input embeddings.
+
+Each label is a matrix of 𝑝 vectors of dimension 𝑑:
+$$
+\text{Tag} \in \mathbb{R}^{p \times d}
+$$
+
+The tag vector is initialized by averaging all word embeddings of the model:
+$$
+\hat{v} = \frac{1}{|V|} \sum_{v \in V} v
+$$
+
+The size of the tag embedding is rescaled to be consistent with other token embeddings:
+$$
+\text{scale} = \frac{1}{|V| \cdot \| \hat{v} \|} \sum_{v \in V} \|v\|
+$$
+This scaling allows the label vectors to adapt to the embedding size that the model is used to.
+This learnable embedding matrix is added to the model's input sequence as if it were a special token and is processed by the transformer layers along with the other inputs. However, these tags do not appear at the output of the model, i.e. they are not generated as an output token. Instead, they only appear in the input part of the model, providing task and domain awareness in the learning process. These embeddings are optimized with gradients in the model's backpropagation process, allowing the model to learn task-specific conditionals on the input.
 
 
 
