@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains"
+title: "Tag-LLM"
 author_profile: true
 redirect_from: 
   - /about/
@@ -8,16 +8,11 @@ redirect_from:
 
 
 ---
+Large Language Models (LLMs) have achieved great success in natural language processing tasks. However, this success does not easily carry over to specialized domains such as biology or chemistry. One of the main reasons is that domain-specific data — like protein sequences or chemical formulas — is underrepresented in the training data of general-purpose models.
 
+Tag‑LLM introduces a modular and flexible approach to adapt general LLMs for specialized tasks. Instead of retraining the whole model, it guides the model using lightweight input tags that indicate the domain (e.g., protein, molecule) and the function (e.g., binding prediction, classification) of the task at hand.
 
-## Why Do General LLMs Fall Short?
-
-While general-purpose large language models (LLMs) have shown impressive performance on natural language tasks, this success often does not carry over to technical domains such as biology and chemistry. The core issue lies in their training data: these models are typically trained on natural language corpora like Wikipedia, books, or news articles, which lack the specialized syntax, symbols, and structural representations found in scientific data — such as protein sequences or SMILES formulas.
-
-Moreover, tasks in these domains require more than just linguistic understanding; they demand domain-specific reasoning and knowledge. Since general LLMs are not exposed to such structured inputs or expert-level semantics, they struggle to accurately interpret and infer in these contexts.
-
-Tag-LLM addresses these limitations by proposing a modular and flexible approach that enhances general-purpose LLMs for specialized tasks — without retraining them from scratch or altering their core architecture.
-
+These tags allow the model to understand what kind of data it is dealing with and what it is expected to do — without changing its architecture. This approach enables general LLMs to handle domain-specific tasks more effectively, and even generalize to new combinations of domains and tasks they haven’t seen before. It offers a practical path toward using general models in scientific and technical fields without building new models from scratch.
 
 
 ## Why Does This Problem Matter?
