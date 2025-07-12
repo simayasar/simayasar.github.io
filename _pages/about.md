@@ -38,14 +38,15 @@ There are two main types of tags:
 **Domain Tags**: Indicate the type of specialized data the model is processing.  
 For example:
 
-`&lt;Protein&gt;` → protein sequences  
-`&lt;SMILES&gt;` → chemical compound representations  
+`<Protein>` → protein sequences  
+`<SMILES>` → chemical compound representations
 
 **Function Tags**: Define the type of task the model should perform.  
 For example:
 
-`&lt;BA&gt;` → binding affinity prediction  
-`&lt;CLS&gt;` → classification
+`<BA>` → binding affinity prediction  
+`<CLS>` → classification
+
 
 
 Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model.
@@ -75,13 +76,21 @@ This scaling allows the label vectors to adapt to the embedding size that the mo
 This learnable embedding matrix is added to the model's input sequence as if it were a special token and is processed by the transformer layers along with the other inputs. However, these tags do not appear at the output of the model, i.e. they are not generated as an output token. Instead, they only appear in the input part of the model, providing task and domain awareness in the learning process. These embeddings are optimized with gradients in the model's backpropagation process, allowing the model to learn task-specific conditionals on the input.
 
 
+## How Do Tags Interact with the Model Architecture?
+One of the most remarkable aspects of Tag-LLM is its ability to adapt general-purpose large language models (LLMs) to various specialized domains without changing the model’s internal structure. In traditional adaptation methods, the model’s weights are typically updated through fine-tuning or extended with new layers. In contrast, Tag-LLM operates solely through input-level tags that are added to the embedding layer.
+
+These tags are inserted directly into the model’s input embeddings and carry task- or domain-specific information forward through the rest of the model. Importantly, the transformer layers, attention mechanisms, and other parameters of the model remain completely untouched.
+
+As a result, the core architecture of the model remains completely frozen throughout the process. All adaptation is instead handled through the learnable tag embeddings that are added at the input level. This design allows the model to flexibly adapt to a wide range of new tasks without requiring any retraining or modification of its internal parameters.
+
+By conditioning the model through these lightweight and modular tags—rather than altering its internals—Tag-LLM enables a powerful yet efficient form of specialization. This greatly reduces training cost while preserving the generalization strength of the original LLM.
 
 
 
 
 
 
-
+![](/images/trainig_tag_llm.png)
 
 
 
