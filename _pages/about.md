@@ -24,8 +24,12 @@ To fill this gap, models have been developed for specific domains, such as speci
 This naturally leads to the question: Is there a way to adapt the powerful general-purpose LLMs we already have to specialized tasks without disrupting their internal structure or retraining them? Tag‑LLM offers a clear answer to this question. By placing “domain” and “function” tags at the input level, general LLMs can be directed toward different tasks and data types. This approach eliminates the need for retraining and enables these models to perform effectively across a much broader range of tasks.
 
 
+## Method: What is Tag-LLM and How Does it Work?
+Tag-LLM offers a modular approach to tagging, developed to guide large language models without retraining them for specific tasks. This method allows the model to adapt to different specializations and task types by adding learnable domain and function tags to the input data. The structure of the model is preserved; the labels are only placed at the input level, acting as a guide.
 
+Below, we will explore the basic building blocks of this method: how the tags are designed, how they are integrated into the embedding layer, and how this structure contributes to the generalizability of the model.
 
+![](/images/tag_llm_method)
 
 
 
