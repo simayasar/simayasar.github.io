@@ -35,19 +35,18 @@ One of the core components of Tag-LLM is its soft tagging mechanism. Instead of 
 
 There are two main types of tags:
 
-Domain Tags: Indicate the type of specialized data the model is processing. 
+**Domain Tags**: Indicate the type of specialized data the model is processing.  
 For example:
 
-<Protein> → protein sequences
+`&lt;Protein&gt;` → protein sequences  
+`&lt;SMILES&gt;` → chemical compound representations  
 
-<SMILES> → chemical compound representations
-
-Function Tags: Define the type of task the model should perform. 
+**Function Tags**: Define the type of task the model should perform.  
 For example:
 
-<BA> → binding affinity prediction
+`&lt;BA&gt;` → binding affinity prediction  
+`&lt;CLS&gt;` → classification
 
-<CLS> → classification
 
 Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model.
 
@@ -55,21 +54,35 @@ Each tag is trained independently and used only when relevant. This means a tag 
 The domain and function tags used in Tag-LLM are defined as learnable vectors (learnable embeddings), not as ordinary text tags. These tags are integrated directly into the embedding layer of the model. The aim is not to add new types of information to the model's vocabulary, but to condition task and domain knowledge into the model via the input embeddings.
 
 Each label is a matrix of 𝑝 vectors of dimension 𝑑:
+
 $$
 \text{Tag} \in \mathbb{R}^{p \times d}
 $$
 
 The tag vector is initialized by averaging all word embeddings of the model:
+
 $$
 \hat{v} = \frac{1}{|V|} \sum_{v \in V} v
 $$
 
 The size of the tag embedding is rescaled to be consistent with other token embeddings:
+
 $$
 \text{scale} = \frac{1}{|V| \cdot \| \hat{v} \|} \sum_{v \in V} \|v\|
 $$
+
 This scaling allows the label vectors to adapt to the embedding size that the model is used to.
 This learnable embedding matrix is added to the model's input sequence as if it were a special token and is processed by the transformer layers along with the other inputs. However, these tags do not appear at the output of the model, i.e. they are not generated as an output token. Instead, they only appear in the input part of the model, providing task and domain awareness in the learning process. These embeddings are optimized with gradients in the model's backpropagation process, allowing the model to learn task-specific conditionals on the input.
+
+
+
+
+
+
+
+
+
+
 
 
 
