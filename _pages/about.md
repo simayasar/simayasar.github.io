@@ -29,7 +29,7 @@ Tag-LLM offers a modular approach to tagging, developed to guide large language 
 
 Below, we will explore the basic building blocks of this method: how the tags are designed, how they are integrated into the embedding layer, and how this structure contributes to the generalizability of the model.
 
-![](/images/tag_llm_method)
+![](/images/tag_llm_method.png)
 
 
 
