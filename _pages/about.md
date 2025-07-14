@@ -221,7 +221,8 @@ Output: The drug combination sensitivity score is ⟨DC⟩ ⟨output⟩
 
 In this task, the model learns both the input tags and the regression head using the mean squared error (MSE) loss. Evaluation is performed using the mean absolute error (MAE) metric on the test set.
 
-The results are summarized in the table below and are quite striking: Tag‑LLM outperforms not only powerful LLMs such as GPT-4 and Galactica but also specialized domain-specific models trained on supervised data. This demonstrates that large-scale pretrained models can leverage their general knowledge effectively to produce strong results, even in specialized domain-specific tasks.
+The results are summarized in the table below and are quite striking: 
+Tag‑LLM outperforms not only powerful LLMs such as GPT-4 and Galactica but also specialized domain-specific models trained on supervised data. This demonstrates that large-scale pretrained models can leverage their general knowledge effectively to produce strong results, even in specialized domain-specific tasks.
 
 ![](/images/case_study_3.png)
 
@@ -235,18 +236,19 @@ Input: The protein sequence is ⟨Protein⟩ ⟨input 0⟩
 Input: The SMILES of the drug is ⟨SMILES⟩ ⟨input 1⟩  
 Output: The binding affinity is ⟨BA⟩ ⟨output⟩
 
-This explicit tagging strategy informs the model not only about the types of inputs it is processing but also the nature of the prediction it needs to perform.
-
-To simulate a realistic distribution shift scenario, the training and testing sets are separated based on the patent year of the labels. Model performance is evaluated using Pearson correlation coefficient (r). While Tag‑LLM ranked third overall, the margin between models was very small. Importantly, Tag‑LLM achieved this result with only 86K trainable parameters, highlighting its potential to achieve even better performance with larger models. These findings underscore the strong capability of general-purpose LLMs to contribute meaningfully to scientific discovery.
+This explicit tagging strategy informs the model not only about the types of inputs it is processing but also the nature of the prediction it needs to perform.To simulate a realistic distribution shift scenario, the training and testing sets are separated based on the patent year of the labels. Model performance is evaluated using Pearson correlation coefficient (r). While Tag‑LLM ranked third overall, the margin between models was very small. Importantly, Tag‑LLM achieved this result with only 86K trainable parameters, highlighting its potential to achieve even better performance with larger models. These findings underscore the strong capability of general-purpose LLMs to contribute meaningfully to scientific discovery.
 
 ![](/images/case_study_4.png)
-
 
 ## Why Is Tag-LLM So Effective?
 It is no coincidence that Tag-LLM delivers such strong results. To understand the true impact, we need to look not only at the overall success rate, but also at the contribution of each part of the model. Systematic experiments were conducted for this: How does the model's performance change when individual components such as labels and headlines are removed? Which part is how important?
 
 ### The Contribution of Tags and the Regression Head
-To better understand the components behind TAG‑LLM’s strong performance, comparisons were made to assess the impact of input tags (both domain and function tags) and the regression head. The model achieves the lowest error (MAE = 12.21) when all three components are present: a domain tag (e.g., ⟨SMILES⟩), a function tag (e.g., ⟨QED⟩), and a dedicated regression head. Removing the function tag leads to a substantial increase in error (MAE = 21.14), indicating that the model relies heavily on these tags to understand the nature of the task. Similarly, removing the regression head results in a significant drop in performance (MAE = 23.42), confirming that language modeling alone is not sufficient for precise numerical prediction. Moreover, enriching the tags with task-specific knowledge—such as augmenting the ⟨SMILES⟩ tag using QED-related information—yields even better results than using non-enriched tags. This enrichment strategy proves more effective than simply using static textual tokens like “Protein”. Altogether, these findings highlight the importance of learnable, task-aware input tags in adapting LLMs for specialized scientific applications.
+To better understand the components behind TAG‑LLM’s strong performance, comparisons were made to assess the impact of input tags (both domain and function tags) and the regression head. The model achieves the lowest error (MAE = 12.21) when all three components are present: a domain tag (e.g., ⟨SMILES⟩), a function tag (e.g., ⟨QED⟩), and a dedicated regression head.
+
+Removing the function tag leads to a substantial increase in error (MAE = 21.14), indicating that the model relies heavily on these tags to understand the nature of the task. Similarly, removing the regression head results in a significant drop in performance (MAE = 23.42), confirming that language modeling alone is not sufficient for precise numerical prediction.
+
+Moreover, enriching the tags with task-specific knowledge—such as augmenting the ⟨SMILES⟩ tag using QED-related information—yields even better results than using non-enriched tags. This enrichment strategy proves more effective than simply using static textual tokens like "Protein". Altogether, these findings highlight the importance of learnable, task-aware input tags in adapting LLMs for specialized scientific applications.
 
 These results are summarized in the table below:
 
@@ -264,9 +266,7 @@ How many tokens should each tag contain? While this might seem like a minor deta
 
 ![](/images/tag.png)
 
-As the tag length (p) increases, test error first decreases and then starts to rise again.
-
-The best performance is achieved when p = 10.
+As the tag length (p) increases, test error first decreases and then starts to rise again.The best performance is achieved when p = 10.
 
 This finding suggests that introducing more parameters initially helps the model, but going too far can lead to issues like overfitting.
 
@@ -276,14 +276,10 @@ Finally, let’s take a look at how TAG-LLM performs against other PEFT (Paramet
 
 ![](/images/comparison.png)
 
-TAG-LLM achieves the lowest error rates in both the QED and Descriptor tasks.
-
-It also ranks first in the Drug Combination task.
-
+TAG-LLM achieves the lowest error rates in both the QED and Descriptor tasks.It also ranks first in the Drug Combination task.
 For the Binding Affinity task, LoRA slightly outperforms TAG-LLM — but it's worth noting that LoRA uses approximately 12 times more learnable parameters.
 
 These results show that TAG-LLM is highly parameter-efficient and capable of delivering strong performance even with limited resources.
-
 
 
 ## Conclusion and Future Work
@@ -292,23 +288,19 @@ Tag‑LLM shows that it’s possible to adapt frozen large language models to hi
 Key Takeaways:
 
 ✅ Efficient: Achieves strong performance with few trainable parameters.
-
 ✅ Simple: No need for full fine-tuning—tags and regression head are enough.
 
 Limitations:
 
 ⚠️ Requires better privacy, safety, and fairness considerations.
-
 ⚠️ Calls for responsible adaptation strategies, especially in sensitive domains.
 
 Future Directions:
 
 ⏰ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
-
 ⏰ Exploring in-context learning to complement tag-based prompting.
 
 ## References
-
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
 
 
@@ -332,78 +324,3 @@ Future Directions:
 
 
 
-## How Important Are Input Tags and Regression Heads?
-To better understand Tag-LLM’s performance, the impact of different components on the model was tested step by step. In particular, the learnable input tags (such as ⟨Protein⟩ or ⟨QED⟩) and the regression head (the component that enables numerical prediction) were individually removed to observe how the model's performance changed. The goal was to assess whether these structures are truly necessary and how much they contribute.
-
-The table below presents the error rates and performance levels of models with different configurations. The comparisons include cases where domain information (such as the word "Protein") was only given as plain text, as well as cases where this information was paired with regression heads.
-
-The results are clear: Tag‑LLM not only achieved the lowest error rates, but it did so with significantly fewer parameters. The improvements are especially pronounced in descriptor and QED tasks, and Tag‑LLM also outperformed all other models in the drug combination task. In the binding affinity task, although one method slightly outperformed Tag‑LLM, it should be noted that the competing model used 12 times more parameters.
-
-This analysis demonstrates that learning domain-specific input tags and using dedicated heads for numerical tasks are critical to making large language models effective in scientific applications.
-
-![](/images/comparison.png)
-
-## Impact of Input Tags 
-First, the effect of input tags (both domain and function tags) was individually tested on the “Drug Combination” (DC) task. When either the domain tag or the function tag was removed from the input, a significant performance drop was observed. Notably, removing the function tag caused a dramatic increase in error rate. This highlights the importance of explicitly providing task-related information to the model.
-
-The results are summarized in the following table:
-
-| Configuration                 | MAE ↓   |
-|------------------------------|---------|
-| Full                         | 12.21   |
-| Enriched                     | 12.10   |
-| Without domain tag           | 12.39   |
-| Without function tag         | 21.14   |
-| Without regression head      | 23.42   |
-
-## Effect of Tag Length
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
-
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
-
-**Markdown generator**
-
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
-
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
-
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
-
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
