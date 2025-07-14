@@ -217,11 +217,11 @@ The second scientific benchmark for Tag‑LLM involves a regression task based o
 The input format is as follows:
 
 Input: Drug 1 is ⟨SMILES⟩ ⟨input 1⟩. Drug 2 is ⟨SMILES⟩ ⟨input 2⟩
+
 Output: The drug combination sensitivity score is ⟨DC⟩ ⟨output⟩
 
-In this task, the model learns both the input tags and the regression head using the mean squared error (MSE) loss. Evaluation is performed using the mean absolute error (MAE) metric on the test set.
+In this task, the model learns both the input tags and the regression head using the mean squared error (MSE) loss. Evaluation is performed using the mean absolute error (MAE) metric on the test set.The results are summarized in the table below and are quite striking: 
 
-The results are summarized in the table below and are quite striking: 
 Tag‑LLM outperforms not only powerful LLMs such as GPT-4 and Galactica but also specialized domain-specific models trained on supervised data. This demonstrates that large-scale pretrained models can leverage their general knowledge effectively to produce strong results, even in specialized domain-specific tasks.
 
 ![](/images/case_study_3.png)
@@ -288,16 +288,19 @@ Tag‑LLM shows that it’s possible to adapt frozen large language models to hi
 Key Takeaways:
 
 ✅ Efficient: Achieves strong performance with few trainable parameters.
+
 ✅ Simple: No need for full fine-tuning—tags and regression head are enough.
 
 Limitations:
 
 ⚠️ Requires better privacy, safety, and fairness considerations.
+
 ⚠️ Calls for responsible adaptation strategies, especially in sensitive domains.
 
 Future Directions:
 
 ⏰ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
+
 ⏰ Exploring in-context learning to complement tag-based prompting.
 
 ## References
