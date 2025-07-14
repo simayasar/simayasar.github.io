@@ -148,7 +148,7 @@ Tag-LLM is not limited to text generation. In scientific tasks, the outputs that
 Cross-entropy loss (CE), for example, is sensitive to the similarity of numbers at the character level, not their meaning:
 
 $$
-\text{CE}("3.14", "3.24") = \text{CE}("3.14", "3.15")
+\text{CE}(3.14, 3.24) = \text{CE}(3.14, 3.15)
 $$
 
 However, from a numerical error perspective, these are clearly not equal:
