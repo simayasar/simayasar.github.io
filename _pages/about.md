@@ -217,7 +217,6 @@ The second scientific benchmark for Tag‑LLM involves a regression task based o
 The input format is as follows:
 
 Input: Drug 1 is ⟨SMILES⟩ ⟨input 1⟩. Drug 2 is ⟨SMILES⟩ ⟨input 2⟩
-
 Output: The drug combination sensitivity score is ⟨DC⟩ ⟨output⟩
 
 In this task, the model learns both the input tags and the regression head using the mean squared error (MSE) loss. Evaluation is performed using the mean absolute error (MAE) metric on the test set.The results are summarized in the table below and are quite striking: 
