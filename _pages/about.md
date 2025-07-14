@@ -171,32 +171,75 @@ Unlike previous approaches that rely on full fine-tuning or fixed instruction pr
 
 | Feature                        | Full Fine-Tuning | Prompt Tuning | PEFT (e.g., LoRA) | **Tag-LLM**              |
 |-------------------------------|------------------|----------------|-------------------|--------------------------|
-| Modifies Model Architecture   | ✅ Yes           | ❌ No         | ❌ No             | ❌ No                   |
-| Number of Learnable Params    | 🔴 Very High     | 🟢 Zero       | 🟡 Medium         | 🟢 Low (tags only)      |
-| Task Transferability          | ❌ Poor          | ❌ Poor       | ❌ Poor           | ✅ Strong (modular)     |
-| Non-linguistic Domain Support | ❌ No            | ❌ Limited    | ❌ Limited        | ✅ Yes                  |
-| Training Cost                 | 🔴 High          | 🟢 Low        | 🟡 Medium         | 🟢 Low                  |
-| Compatibility with LLMs       | 🔴 Limited       | 🟡 Moderate   | 🟡 Moderate       | ✅ High                 |
+| Modifies Model Architecture   | Yes           | No         | No             | No                   |
+| Number of Learnable Params    | Very High     | Zero       | Medium         | Low (tags only)      |
+| Task Transferability          | Poor          | Poor       | Poor           | Strong (modular)     |
+| Non-linguistic Domain Support | No            | Limited    | Limited        | Yes                  |
+| Training Cost                 | High          | Low        | Medium         | Low                  |
+| Compatibility with LLMs       | Limited       | Moderate   | Moderate       | High                 |
+
+## Experimental Success: How Well Does a Multilingual Translation Task Work?
+To evaluate how Tag‑LLM performs in specialized domains, the first experiment was conducted on a multilingual translation task. In this setup, separate domain tags (e.g., ⟨EN⟩, ⟨FR⟩, etc.) are used for different languages, along with a single shared function tag ⟨Translate⟩ to represent the translation operation. The input format is as follows:
+
+Input: ⟨src_lang⟩ source sentence  
+Output: ⟨tgt_lang⟩ ⟨Translate⟩ target sentence
+
+The model is trained using only tags and paired sentences—no explicit user instructions are provided. Although training data includes just 6 languages and 5 translation pairs, the model still performs competitively on unseen language pairs (e.g., ES↔PT), demonstrating the strong generalization ability of the tags.
+
+The table below presents spBLEU scores on the FLORES-101 dataset, comparing Tag‑LLM to other models like GPT-3, BLOOM, and XGLM. Tag‑LLM ranks first on several seen pairs and yields meaningful results even on language combinations it has never seen. This shows that the ⟨Translate⟩ tag successfully encodes the translation ability, making zero-shot generalization possible.
+
+![](/images/case_study_1.png)
+
+## Experimental Success: Can LLMs Handle Scientific Tasks Too?
+Although translation is a natural fit for LLMs, many real-world tasks—especially in science—require working with structured, non-linguistic data. Can these models generalize to such specialized domains as well? Let's find out.
+
+# Case Study: Single-Domain, Single-Instance Tasks
+To evaluate the effectiveness of Tag‑LLM in scientific tasks, experiments were first conducted on two different “single-domain, single-instance” problems. The first task involves predicting descriptor values from protein sequences; the second focuses on calculating the QED score, which indicates how drug-like a chemical compound is.
+
+In these tasks, the inputs are not plain text — they consist of domain-specific representations such as biological sequences and chemical formulas. To enable the LLM to interpret these complex structures and make accurate numerical predictions, each task is augmented with a dedicated domain tag and a regression head. The model uses domain tags like ⟨Protein⟩ or ⟨SMILES⟩ in conjunction with task-specific tags like ⟨Descriptor⟩ or ⟨QED⟩. The structure of the input/output looks like this:
+
+Input: The protein sequence is ⟨Protein⟩  
+Output: The descriptor value is ⟨Descriptor⟩
+--
+Input: The SMILES of the molecule is ⟨SMILES⟩  
+Output: The quantitative estimate of druglikeness is ⟨QED⟩
+
+The model was compared against instruction-based models (e.g., GPT-4, Galactica), fine-tuning methods (e.g., LoRA, prompt tuning), and domain-specialized models (e.g., LlaSMol, Text+Chem T5). The results of these comparisons are summarized in the table below.
+
+Tag‑LLM achieved the lowest error rates (MSE) in both the QED and descriptor tasks, outperforming not only general-purpose models but also domain-specific models with larger parameter sizes. These results highlight the effectiveness of learned input tags in adapting LLMs to scientific and structured data tasks.
+
+![](/images/case_study_2.png)
 
 
+# Case Study: Single-Domain, Multi-Instance Tasks
+The second scientific benchmark for Tag‑LLM involves a regression task based on multiple inputs: drug combination prediction. In this task, the model receives two SMILES sequences representing the chemical structures of two different drugs, both preceded by the ⟨SMILES⟩ domain tag. The model is guided to produce an output using the ⟨DC⟩ function tag.
 
+The input format is as follows:
 
+Input: Drug 1 is ⟨SMILES⟩ ⟨input 1⟩. Drug 2 is ⟨SMILES⟩ ⟨input 2⟩
+Output: The drug combination sensitivity score is ⟨DC⟩ ⟨output⟩
 
+In this task, the model learns both the input tags and the regression head using the mean squared error (MSE) loss. Evaluation is performed using the mean absolute error (MAE) metric on the test set.
 
+The results are summarized in the table below and are quite striking: Tag‑LLM outperforms not only powerful LLMs such as GPT-4 and Galactica but also specialized domain-specific models trained on supervised data. This demonstrates that large-scale pretrained models can leverage their general knowledge effectively to produce strong results, even in specialized domain-specific tasks.
 
+![](/images/case_study_3.png)
 
+# Case Study: Multi-Domain, Multi-Instance Tasks
 
+To further evaluate Tag‑LLM’s effectiveness in scientific domains, a more challenging multi-domain regression task was introduced: predicting the binding affinity between a small molecule drug and a target protein. Traditionally, solving this task requires costly and time-consuming laboratory experiments. If LLMs can perform this prediction reliably, it could significantly accelerate drug discovery and broaden the scope of molecular screening.
 
+In this setup, the model receives the SMILES string of the compound and the amino acid sequence of the protein, each annotated with its corresponding domain tag. The function tag ⟨BA⟩ (binding affinity) is appended to indicate the task. The format of the input is structured as follows:
 
+Input: The protein sequence is ⟨Protein⟩ ⟨input 0⟩  
+Input: The SMILES of the drug is ⟨SMILES⟩ ⟨input 1⟩  
+Output: The binding affinity is ⟨BA⟩ ⟨output⟩
 
+This explicit tagging strategy informs the model not only about the types of inputs it is processing but also the nature of the prediction it needs to perform.
 
+To simulate a realistic distribution shift scenario, the training and testing sets are separated based on the patent year of the labels. Model performance is evaluated using Pearson correlation coefficient (r). While Tag‑LLM ranked third overall, the margin between models was very small. Importantly, Tag‑LLM achieved this result with only 86K trainable parameters, highlighting its potential to achieve even better performance with larger models. These findings underscore the strong capability of general-purpose LLMs to contribute meaningfully to scientific discovery.
 
-
-
-
-
-
-
+![](/images/case_study_4.png)
 
 
 
