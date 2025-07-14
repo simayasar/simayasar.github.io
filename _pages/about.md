@@ -303,9 +303,9 @@ Limitations:
 
 Future Directions:
 
-Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
+⏰ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
 
-Exploring in-context learning to complement tag-based prompting.
+⏰ Exploring in-context learning to complement tag-based prompting.
 
 ## References
 
