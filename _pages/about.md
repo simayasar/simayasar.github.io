@@ -15,7 +15,7 @@ Tag‑LLM introduces a modular and flexible approach to adapt general LLMs for s
 These tags allow the model to understand what kind of data it is dealing with and what it is expected to do — without changing its architecture. This approach enables general LLMs to handle domain-specific tasks more effectively, and even generalize to new combinations of domains and tasks they haven’t seen before. It offers a practical path toward using general models in scientific and technical fields without building new models from scratch.
 
 
-## Why Does This Problem Matter?
+# Why Does This Problem Matter?
 General-purpose large language models (LLMs) have achieved high success in natural language processing tasks. However, in specialized fields such as biology, chemistry and medicine, they do not have the same success. The main reason for this is that natural language data (text, books, articles) are often used to train these models. Since structures such as protein sequences, DNA codes or chemical formulas are quite different from natural language, the model cannot understand the context against these data and produce accurate results.
 
 To solve this problem, some domain-specific models have been developed. For example, models for disease diagnosis, drug discovery or chemical reaction prediction. However, these models are usually trained from scratch and require a lot of labeled data and a lot of computational power. This makes them both expensive and difficult to deploy.
@@ -23,14 +23,14 @@ To solve this problem, some domain-specific models have been developed. For exam
 This is where Tag-LLM comes in. Thanks to its "domain" and "task" tags, it makes it possible to use existing generic models for different tasks without touching their architecture. In this way, they can be adapted to many different areas of expertise without the need for retraining.
 
 
-## Method: What is Tag-LLM and How Does it Work?
+# Method: What is Tag-LLM and How Does it Work?
 Tag-LLM offers a modular approach to tagging, developed to guide large language models without retraining them for specific tasks. This method allows the model to adapt to different specializations and task types by adding learnable domain and function tags to the input data. The structure of the model is preserved; the labels are only placed at the input level, acting as a guide.
 
 Below, we will explore the basic building blocks of this method: how the tags are designed, how they are integrated into the embedding layer, and how this structure contributes to the generalizability of the model.
 
 ![](/images/tag_llm_method.png)
 
-## Soft Tag Structure
+# Soft Tag Structure
 One of the core components of Tag-LLM is its soft tagging mechanism. Instead of using hard-coded text tokens, tags are represented as learnable continuous embeddings. Each tag is essentially a special vector that encodes semantic information and is directly inserted into the model’s input embedding layer.
 
 There are two main types of tags:
@@ -51,7 +51,7 @@ For example:
 
 Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model.
 
-## Integration into Embedding
+# Integration into Embedding
 The domain and function tags used in Tag-LLM are defined as learnable vectors (learnable embeddings), not as ordinary text tags. These tags are integrated directly into the embedding layer of the model. The aim is not to add new types of information to the model's vocabulary, but to condition task and domain knowledge into the model via the input embeddings.
 
 Each label is a matrix of 𝑝 vectors of dimension 𝑑:
@@ -76,7 +76,7 @@ This scaling allows the label vectors to adapt to the embedding size that the mo
 This learnable embedding matrix is added to the model's input sequence as if it were a special token and is processed by the transformer layers along with the other inputs. However, these tags do not appear at the output of the model, i.e. they are not generated as an output token. Instead, they only appear in the input part of the model, providing task and domain awareness in the learning process. These embeddings are optimized with gradients in the model's backpropagation process, allowing the model to learn task-specific conditionals on the input.
 
 
-## How Do Tags Interact with the Model Architecture?
+# How Do Tags Interact with the Model Architecture?
 One of the most remarkable aspects of Tag-LLM is its ability to adapt general-purpose large language models (LLMs) to various specialized domains without changing the model’s internal structure. In traditional adaptation methods, the model’s weights are typically updated through fine-tuning or extended with new layers. In contrast, Tag-LLM operates solely through input-level tags that are added to the embedding layer.
 
 These tags are inserted directly into the model’s input embeddings and carry task- or domain-specific information forward through the rest of the model. Importantly, the transformer layers, attention mechanisms, and other parameters of the model remain completely untouched.
@@ -86,12 +86,12 @@ As a result, the core architecture of the model remains completely frozen throug
 By conditioning the model through these lightweight and modular tags—rather than altering its internals—Tag-LLM enables a powerful yet efficient form of specialization. This greatly reduces training cost while preserving the generalization strength of the original LLM.
 
 
-## How Are Tags Trained? A Three-Stage Learning Strategy
+# How Are Tags Trained? A Three-Stage Learning Strategy
 Tag-LLM follows a three-stage hierarchical training protocol to adapt general-purpose large language models (LLMs) to specific domains and tasks. Through this approach, components with different functionalities, such as domain and function tags, are gradually learned from more general data to more specialized tasks.
 
 ![](/images/trainig_tag_llm.png)
 
-### Stage 1: Learning Domain Tags
+## Stage 1: Learning Domain Tags
 In the first phase of training, domain labels are learned, each of which belongs to a specific area of expertise. These labels sensitize the model to domains represented by external data that it has not yet encountered. For example, structures such as amino acid sequences (proteins) or chemical molecules (SMILES).
 
 The aim is for the tag to convey general information about the domain. Thus, when the tag is included in the input, the model learns this context from the input and solves the corresponding task more efficiently.
@@ -133,7 +133,7 @@ This stage has two key benefits:
 
 2. Since the learned tag is task-agnostic, it improves the model's ability to generalize across different tasks.
 
-### Stage 2 & 3: Learning Function Tags
+## Stage 2 & 3: Learning Function Tags
 One of the most powerful features of Tag‑LLM is its ability to learn function tags directly from data. These tags guide the model to perform a specific task — such as classification or regression — based solely on labeled examples. Unlike previous approaches where tasks are defined via explicit user instructions, Tag‑LLM learns the tasks implicitly from the training data itself.
 
 During training, a domain tag is prepended to the input to indicate the type of specialized data (e.g., protein or molecule). Then, a function tag is appended to the end of the input to signal what task should be performed. This allows the model to understand both what the input represents and what it is supposed to do with it. The prediction is made based on the final hidden state associated with the function tag.
@@ -142,7 +142,7 @@ Function tags are optimized specifically for each task. For example, in a classi
 
 These two stages work together to enable the model to perform a wide range of tasks with minimal parameter updates. Furthermore, the same function tag can be reused across domains, enabling the model to make accurate predictions even on unseen combinations of domains and tasks — a capability known as zero-shot generalization. This flexibility makes Tag‑LLM highly suitable for systems that need to handle a broad spectrum of specialized tasks.
 
-## What If the Output Isn't Text?
+# What If the Output Isn't Text?
 Tag-LLM is not limited to text generation. In scientific tasks, the outputs that the model needs to produce are often numerical values - for example a binding score or a probability vector. Several problems arise when trying to represent such outputs in text form:
 
 Cross-entropy loss (CE), for example, is sensitive to the similarity of numbers at the character level, not their meaning:
@@ -166,7 +166,7 @@ $$
 Here, \( d \) denotes the embedding dimension of the model, and \( d_t \) is the output dimension of the task (e.g., 1 for a single numeric output, or \( k \) for a multi-class classification task).
 This approach significantly improves the effectiveness of LLMs on non-natural language tasks and increases the accuracy of their outputs.
 
-## How Does This Compare to Prior Work?
+# How Does This Compare to Prior Work?
 Unlike previous approaches that rely on full fine-tuning or fixed instruction prompts, Tag‑LLM introduces a modular tagging framework. This allows adaptation to both linguistic and non-linguistic domains (e.g., molecules, proteins) without changing the model’s architecture. Compared to PEFT methods like LoRA or prompt tuning, it separates domain and task knowledge via soft embeddings, enabling reusability, generalization, and efficient training.
 
 | Feature                        | Full Fine-Tuning | Prompt Tuning | PEFT (e.g., LoRA) | **Tag-LLM**              |
@@ -178,7 +178,7 @@ Unlike previous approaches that rely on full fine-tuning or fixed instruction pr
 | Training Cost                 | High          | Low        | Medium         | Low                  |
 | Compatibility with LLMs       | Limited       | Moderate   | Moderate       | High                 |
 
-## Experimental Success: How Well Does a Multilingual Translation Task Work?
+# Experimental Success: How Well Does a Multilingual Translation Task Work?
 To evaluate how Tag‑LLM performs in specialized domains, the first experiment was conducted on a multilingual translation task. In this setup, separate domain tags (e.g., ⟨EN⟩, ⟨FR⟩, etc.) are used for different languages, along with a single shared function tag ⟨Translate⟩ to represent the translation operation. The input format is as follows:
 
 Input: ⟨src_lang⟩ source sentence  
@@ -190,10 +190,10 @@ The table below presents spBLEU scores on the FLORES-101 dataset, comparing Tag�
 
 ![](/images/case_study_1.png)
 
-## Experimental Success: Can LLMs Handle Scientific Tasks Too?
+# Experimental Success: Can LLMs Handle Scientific Tasks Too?
 Although translation is a natural fit for LLMs, many real-world tasks—especially in science—require working with structured, non-linguistic data. Can these models generalize to such specialized domains as well? Let's find out.
 
-### Case Study: Single-Domain, Single-Instance Tasks
+## Case Study: Single-Domain, Single-Instance Tasks
 To evaluate the effectiveness of Tag‑LLM in scientific tasks, experiments were first conducted on two different “single-domain, single-instance” problems. The first task involves predicting descriptor values from protein sequences; the second focuses on calculating the QED score, which indicates how drug-like a chemical compound is.
 
 In these tasks, the inputs are not plain text — they consist of domain-specific representations such as biological sequences and chemical formulas. To enable the LLM to interpret these complex structures and make accurate numerical predictions, each task is augmented with a dedicated domain tag and a regression head. The model uses domain tags like ⟨Protein⟩ or ⟨SMILES⟩ in conjunction with task-specific tags like ⟨Descriptor⟩ or ⟨QED⟩. The structure of the input/output looks like this:
@@ -211,7 +211,7 @@ Tag‑LLM achieved the lowest error rates (MSE) in both the QED and descriptor t
 ![](/images/case_study_2.png)
 
 
-### Case Study: Single-Domain, Multi-Instance Tasks
+## Case Study: Single-Domain, Multi-Instance Tasks
 The second scientific benchmark for Tag‑LLM involves a regression task based on multiple inputs: drug combination prediction. In this task, the model receives two SMILES sequences representing the chemical structures of two different drugs, both preceded by the ⟨SMILES⟩ domain tag. The model is guided to produce an output using the ⟨DC⟩ function tag.
 
 The input format is as follows:
@@ -225,7 +225,7 @@ The results are summarized in the table below and are quite striking: Tag‑LLM 
 
 ![](/images/case_study_3.png)
 
-### Case Study: Multi-Domain, Multi-Instance Tasks
+## Case Study: Multi-Domain, Multi-Instance Tasks
 
 To further evaluate Tag‑LLM’s effectiveness in scientific domains, a more challenging multi-domain regression task was introduced: predicting the binding affinity between a small molecule drug and a target protein. Traditionally, solving this task requires costly and time-consuming laboratory experiments. If LLMs can perform this prediction reliably, it could significantly accelerate drug discovery and broaden the scope of molecular screening.
 
@@ -242,10 +242,10 @@ To simulate a realistic distribution shift scenario, the training and testing se
 ![](/images/case_study_4.png)
 
 
-## Why Is Tag-LLM So Effective?
+# Why Is Tag-LLM So Effective?
 It is no coincidence that Tag-LLM delivers such strong results. To understand the true impact, we need to look not only at the overall success rate, but also at the contribution of each part of the model. Systematic experiments were conducted for this: How does the model's performance change when individual components such as labels and headlines are removed? Which part is how important?
 
-### The Contribution of Tags and the Regression Head
+## The Contribution of Tags and the Regression Head
 To better understand the components behind TAG‑LLM’s strong performance, comparisons were made to assess the impact of input tags (both domain and function tags) and the regression head. The model achieves the lowest error (MAE = 12.21) when all three components are present: a domain tag (e.g., ⟨SMILES⟩), a function tag (e.g., ⟨QED⟩), and a dedicated regression head. Removing the function tag leads to a substantial increase in error (MAE = 21.14), indicating that the model relies heavily on these tags to understand the nature of the task. Similarly, removing the regression head results in a significant drop in performance (MAE = 23.42), confirming that language modeling alone is not sufficient for precise numerical prediction. Moreover, enriching the tags with task-specific knowledge—such as augmenting the ⟨SMILES⟩ tag using QED-related information—yields even better results than using non-enriched tags. This enrichment strategy proves more effective than simply using static textual tokens like “Protein”. Altogether, these findings highlight the importance of learnable, task-aware input tags in adapting LLMs for specialized scientific applications.
 
 These results are summarized in the table below:
@@ -259,7 +259,7 @@ These results are summarized in the table below:
 | Without function tag         | 21.14   |
 | Without regression head      | 23.42   |
 
-### Effect of Tag Length
+## Effect of Tag Length
 How many tokens should each tag contain? While this might seem like a minor detail, it has a direct impact on model performance. The chart below illustrates how tag length affects test error.
 
 ![](/images/tag.png)
@@ -271,7 +271,7 @@ The best performance is achieved when p = 10.
 This finding suggests that introducing more parameters initially helps the model, but going too far can lead to issues like overfitting.
 
 
-### How Does TAG-LLM Compare to Other Techniques?
+## How Does TAG-LLM Compare to Other Techniques?
 Finally, let’s take a look at how TAG-LLM performs against other PEFT (Parameter-Efficient Fine-Tuning) methods based on the results summarized in the table below:
 
 ![](/images/comparison.png)
@@ -286,7 +286,7 @@ These results show that TAG-LLM is highly parameter-efficient and capable of del
 
 
 
-## Conclusion and Future Work
+# Conclusion and Future Work
 Tag‑LLM shows that it’s possible to adapt frozen large language models to highly specialized domains using lightweight, modular components like input tags and a simple regression head. The results are promising even with minimal training effort.
 
 Key Takeaways:
@@ -307,7 +307,7 @@ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistr
 
 Exploring in-context learning to complement tag-based prompting.
 
-## References
+# References
 
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
 
