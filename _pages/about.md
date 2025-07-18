@@ -8,6 +8,20 @@ redirect_from:
 
 
 ---
+## Abstract
+This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry. Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using only input-level tags (domain and task tags), without changing the model’s architecture. This lightweight approach offers high performance at low cost and strong zero-shot generalization.
+
+## Who Should Read This?
+This post is useful for:
+
+Students new to machine learning and deep learning
+
+Researchers interested in LLM applications in biology, chemistry, or medicine
+
+Engineers who want to solve scientific tasks without training models from scratch
+
+
+## Introduction
 Large Language Models (LLMs) have achieved great success in natural language processing tasks. However, this success does not easily carry over to specialized domains such as biology or chemistry. One of the main reasons is that domain-specific data — like protein sequences or chemical formulas — is underrepresented in the training data of general-purpose models.
 
 Tag‑LLM introduces a modular and flexible approach to adapt general LLMs for specialized tasks. Instead of retraining the whole model, it guides the model using lightweight input tags that indicate the domain (e.g., protein, molecule) and the function (e.g., binding prediction, classification) of the task at hand.
@@ -279,7 +293,6 @@ TAG-LLM achieves the lowest error rates in both the QED and Descriptor tasks.It 
 For the Binding Affinity task, LoRA slightly outperforms TAG-LLM — but it's worth noting that LoRA uses approximately 12 times more learnable parameters.
 
 These results show that TAG-LLM is highly parameter-efficient and capable of delivering strong performance even with limited resources.
-
 
 ## Conclusion and Future Work
 Tag‑LLM shows that it’s possible to adapt frozen large language models to highly specialized domains using lightweight, modular components like input tags and a simple regression head. The results are promising even with minimal training effort.
