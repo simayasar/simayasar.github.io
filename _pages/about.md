@@ -317,11 +317,11 @@ Future Directions:
 
 ⏰ Exploring in-context learning to complement tag-based prompting.
 
----
-
 ## Summary
 Tag‑LLM shows that large language models can be adapted to specialized scientific domains using simple input-level tags.  
 This lightweight method achieves strong performance with minimal training cost and preserves the generalization ability of general-purpose LLMs.  
+
+---
 
 ## References
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
