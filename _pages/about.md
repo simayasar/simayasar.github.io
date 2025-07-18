@@ -23,18 +23,16 @@ This lightweight approach offers high performance at low cost and strong zero-sh
 
 
 ## Introduction
-Large Language Models (LLMs) have achieved great success in natural language processing tasks. However, this success does not easily carry over to specialized domains such as biology or chemistry. One of the main reasons is that domain-specific data — like protein sequences or chemical formulas — is underrepresented in the training data of general-purpose models.
+Large Language Models (LLMs) have shown great success in natural language processing tasks, but this success does not easily transfer to specialized domains such as biology or chemistry because domain-specific data — like protein sequences or chemical formulas — is underrepresented in their training.
 
-Tag‑LLM introduces a modular and flexible approach to adapt general LLMs for specialized tasks. Instead of retraining the whole model, it guides the model using lightweight input tags that indicate the domain (e.g., protein, molecule) and the function (e.g., binding prediction, classification) of the task at hand.
-
-These tags allow the model to understand what kind of data it is dealing with and what it is expected to do — without changing its architecture. This approach enables general LLMs to handle domain-specific tasks more effectively, and even generalize to new combinations of domains and tasks they haven’t seen before. It offers a practical path toward using general models in scientific and technical fields without building new models from scratch.
+Tag‑LLM offers a lightweight and flexible solution: instead of retraining the entire model, it uses simple "domain" and "function" tags to guide the model. This allows general-purpose LLMs to handle specialized tasks effectively and even generalize to unseen domain–task combinations, providing a practical and low-cost way to use existing models in scientific fields.
 
 ## Why Does This Problem Matter?
-General-purpose large language models (LLMs) have achieved high success in natural language processing tasks. However, in specialized fields such as biology, chemistry and medicine, they do not have the same success. The main reason for this is that natural language data (text, books, articles) are often used to train these models. Since structures such as protein sequences, DNA codes or chemical formulas are quite different from natural language, the model cannot understand the context against these data and produce accurate results.
+General-purpose LLMs often fail in biology, chemistry, and medicine because they are mainly trained on natural language data (text, books, articles). Structures such as protein sequences, DNA codes, or chemical formulas are very different from natural language, making it hard for these models to capture context and produce accurate results.
 
-To solve this problem, some domain-specific models have been developed. For example, models for disease diagnosis, drug discovery or chemical reaction prediction. However, these models are usually trained from scratch and require a lot of labeled data and a lot of computational power. This makes them both expensive and difficult to deploy.
+Domain-specific models have been developed for tasks like disease diagnosis, drug discovery, or chemical reaction prediction. However, these models are trained from scratch, require large amounts of labeled data, and demand high computational power, making them expensive and difficult to deploy.
 
-This is where Tag-LLM comes in. Thanks to its "domain" and "task" tags, it makes it possible to use existing generic models for different tasks without touching their architecture. In this way, they can be adapted to many different areas of expertise without the need for retraining.
+This is where Tag-LLM comes in. Thanks to tags, it makes it possible to use existing generic models for different tasks without touching their architecture. In this way, they can be adapted to many different areas of expertise without the need for retraining.
 
 ## Method: What is Tag-LLM and How Does it Work?
 Tag-LLM offers a modular approach to tagging, developed to guide large language models without retraining them for specific tasks. This method allows the model to adapt to different specializations and task types by adding learnable domain and function tags to the input data. The structure of the model is preserved; the labels are only placed at the input level, acting as a guide.
@@ -61,8 +59,7 @@ For example:
 `<CLS>` → classification
 
 
-
-Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model.
+Each tag is trained independently and used only when relevant. This means a tag can be reused across different tasks or domains, because it encodes the general function rather than task-specific data patterns. For instance, a ⟨CLS⟩ tag always represents classification regardless of whether it is applied to proteins, molecules, or text. Thanks to this structure, Tag‑LLM remains both flexible and reusable, avoiding the need to retrain or redesign the core model
 
 ## Integration into Embedding
 The domain and function tags used in Tag-LLM are defined as learnable vectors (learnable embeddings), not as ordinary text tags. These tags are integrated directly into the embedding layer of the model. The aim is not to add new types of information to the model's vocabulary, but to condition task and domain knowledge into the model via the input embeddings.
@@ -178,7 +175,7 @@ Here, \( d \) denotes the embedding dimension of the model, and \( d_t \) is the
 This approach significantly improves the effectiveness of LLMs on non-natural language tasks and increases the accuracy of their outputs.
 
 ## How Does This Compare to Prior Work?
-Unlike previous approaches that rely on full fine-tuning or fixed instruction prompts, Tag‑LLM introduces a modular tagging framework. This allows adaptation to both linguistic and non-linguistic domains (e.g., molecules, proteins) without changing the model’s architecture. Compared to PEFT methods like LoRA or prompt tuning, it separates domain and task knowledge via soft embeddings, enabling reusability, generalization, and efficient training.
+Unlike previous approaches that rely on full fine-tuning or fixed instruction prompts, Tag‑LLM introduces a modular tagging framework. This allows adaptation to both linguistic and non-linguistic domains (e.g., molecules, proteins) without changing the model’s architecture. Compared to PEFT methods like LoRA (Low-Rank Adaptation) [2] or prompt tuning, it separates domain and task knowledge via soft embeddings, enabling reusability, generalization, and efficient training.
 
 | Feature                        | Full Fine-Tuning | Prompt Tuning | PEFT (e.g., LoRA) | **Tag-LLM**              |
 |-------------------------------|------------------|----------------|-------------------|--------------------------|
@@ -280,7 +277,7 @@ As the tag length (p) increases, test error first decreases and then starts to r
 This finding suggests that introducing more parameters initially helps the model, but going too far can lead to issues like overfitting.
 
 ### How Does TAG-LLM Compare to Other Techniques?
-Finally, let’s take a look at how TAG-LLM performs against other PEFT (Parameter-Efficient Fine-Tuning) methods based on the results summarized in the table below:
+Finally, let’s take a look at how TAG-LLM performs against other PEFT(Parameter-Efficient Fine-Tuning ) [3] methods based on the results summarized in the table below:
 
 ![](/images/comparison.png)
 
@@ -300,24 +297,25 @@ Key Takeaways:
 
 Limitations:
 
-⚠️ Requires better privacy, safety, and fairness considerations.
+⚠️ Privacy, safety, and fairness remain underexplored.
+The method assumes that domain-specific data used for tag training is reliable and unbiased, but in sensitive areas like healthcare or drug discovery, improper data handling can lead to privacy violations, biased predictions, or unsafe decisions.
 
-⚠️ Calls for responsible adaptation strategies, especially in sensitive domains.
+⚠️ Responsible adaptation strategies are still required.
+Although Tag‑LLM enables efficient adaptation, blindly applying it to critical scientific or clinical tasks may propagate errors or amplify biases due to the lack of rigorous validation.
 
 Future Directions:
 
-⏰ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
+⏰ Expanding to broader scientific domains.
+Applying Tag‑LLM to domains such as computational biology, physics, or gene prediction could validate its scalability and robustness.
 
-⏰ Exploring in-context learning to complement tag-based prompting.
-
-## Summary
-Tag‑LLM shows that large language models can be adapted to specialized scientific domains using simple input-level tags.  
-This lightweight method achieves strong performance with minimal training cost and preserves the generalization ability of general-purpose LLMs.  
+⏰ Combining with in-context learning for safer adaptation.
+Exploring hybrid strategies (e.g., tag-based prompting + in-context demonstrations) may improve interpretability, reduce harmful biases, and ensure more reliable predictions in sensitive applications.
 
 ## References
-- [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
-
-
+- [1] Shen, Junhong, Tenenholtz, Neil, Hall, James Brian, Alvarez-Melis, David, & Fusi, Nicolo. (2024). Tag-LLM: Repurposing general-purpose LLMS for specialized domains
+- [2] Hu, J. E., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang,S., and Chen, W. LoRA: Low-rank adaptation of large
+language models. arXiv preprint arXiv:2106.09685, 2021.
+- [3] Lester, B., Al-Rfou, R., and Constant, N. The power of scale  for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691, 2021.
 
 
 
