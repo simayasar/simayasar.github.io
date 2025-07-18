@@ -312,7 +312,7 @@ Applying Tag‑LLM to domains such as computational biology, physics, or gene pr
 Exploring hybrid strategies (e.g., tag-based prompting + in-context demonstrations) may improve interpretability, reduce harmful biases, and ensure more reliable predictions in sensitive applications.
 
 ## References
-- [1] Shen, Junhong, Tenenholtz, Neil, Hall, James Brian, Alvarez-Melis, David, & Fusi, Nicolo. (2024). Tag-LLM: Repurposing general-purpose LLMS for specialized domains
+- [1] Shen, Junhong, Tenenholtz, Neil, Hall, James Brian, Alvarez-Melis, David, & Fusi, Nicolo. (2024). Tag-LLM: Repurposing general-purpose LLMS for specialized domains ([arXiv](https://arxiv.org/abs/2402.05140))
 - [2] Hu, J. E., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang,S., and Chen, W. LoRA: Low-rank adaptation of large
 language models. arXiv preprint arXiv:2106.09685, 2021.
 - [3] Lester, B., Al-Rfou, R., and Constant, N. The power of scale  for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691, 2021.
