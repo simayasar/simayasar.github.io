@@ -18,7 +18,6 @@ This lightweight approach offers high performance at low cost and strong zero-sh
 
 <small><em>
 This post is useful for:  
-
 - Students new to machine learning and deep learning  
 - Researchers interested in LLM applications in biology, chemistry, or medicine  
 - Engineers who want to solve scientific tasks without training models from scratch  
@@ -321,12 +320,9 @@ Future Directions:
 
 ---
 
-<small><em>  
-**Summary:**  
+## Summary
 Tag‑LLM shows that large language models can be adapted to specialized scientific domains using simple input-level tags.  
 This lightweight method achieves strong performance with minimal training cost and preserves the generalization ability of general-purpose LLMs.  
-</em></small>
-
 
 ## References
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
