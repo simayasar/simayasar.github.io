@@ -298,17 +298,21 @@ Key Takeaways:
 Limitations:
 
 ⚠️ Privacy, safety, and fairness remain underexplored.
+
 The method assumes that domain-specific data used for tag training is reliable and unbiased, but in sensitive areas like healthcare or drug discovery, improper data handling can lead to privacy violations, biased predictions, or unsafe decisions.
 
 ⚠️ Responsible adaptation strategies are still required.
+
 Although Tag‑LLM enables efficient adaptation, blindly applying it to critical scientific or clinical tasks may propagate errors or amplify biases due to the lack of rigorous validation.
 
 Future Directions:
 
 ⏰ Expanding to broader scientific domains.
+
 Applying Tag‑LLM to domains such as computational biology, physics, or gene prediction could validate its scalability and robustness.
 
 ⏰ Combining with in-context learning for safer adaptation.
+
 Exploring hybrid strategies (e.g., tag-based prompting + in-context demonstrations) may improve interpretability, reduce harmful biases, and ensure more reliable predictions in sensitive applications.
 
 ## References
