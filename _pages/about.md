@@ -15,7 +15,6 @@ This lightweight approach offers high performance at low cost and strong zero-sh
 </em></small>
 
 <small><em>Who Should Read This?</em></small>  
-
 <small><em>This post is useful for:</em></small>  
 
 <small><em>• Students new to machine learning and deep learning</em></small>  
@@ -30,14 +29,12 @@ Tag‑LLM introduces a modular and flexible approach to adapt general LLMs for s
 
 These tags allow the model to understand what kind of data it is dealing with and what it is expected to do — without changing its architecture. This approach enables general LLMs to handle domain-specific tasks more effectively, and even generalize to new combinations of domains and tasks they haven’t seen before. It offers a practical path toward using general models in scientific and technical fields without building new models from scratch.
 
-
 ## Why Does This Problem Matter?
 General-purpose large language models (LLMs) have achieved high success in natural language processing tasks. However, in specialized fields such as biology, chemistry and medicine, they do not have the same success. The main reason for this is that natural language data (text, books, articles) are often used to train these models. Since structures such as protein sequences, DNA codes or chemical formulas are quite different from natural language, the model cannot understand the context against these data and produce accurate results.
 
 To solve this problem, some domain-specific models have been developed. For example, models for disease diagnosis, drug discovery or chemical reaction prediction. However, these models are usually trained from scratch and require a lot of labeled data and a lot of computational power. This makes them both expensive and difficult to deploy.
 
 This is where Tag-LLM comes in. Thanks to its "domain" and "task" tags, it makes it possible to use existing generic models for different tasks without touching their architecture. In this way, they can be adapted to many different areas of expertise without the need for retraining.
-
 
 ## Method: What is Tag-LLM and How Does it Work?
 Tag-LLM offers a modular approach to tagging, developed to guide large language models without retraining them for specific tasks. This method allows the model to adapt to different specializations and task types by adding learnable domain and function tags to the input data. The structure of the model is preserved; the labels are only placed at the input level, acting as a guide.
@@ -91,7 +88,6 @@ $$
 This scaling allows the label vectors to adapt to the embedding size that the model is used to.
 This learnable embedding matrix is added to the model's input sequence as if it were a special token and is processed by the transformer layers along with the other inputs. However, these tags do not appear at the output of the model, i.e. they are not generated as an output token. Instead, they only appear in the input part of the model, providing task and domain awareness in the learning process. These embeddings are optimized with gradients in the model's backpropagation process, allowing the model to learn task-specific conditionals on the input.
 
-
 ## How Do Tags Interact with the Model Architecture?
 One of the most remarkable aspects of Tag-LLM is its ability to adapt general-purpose large language models (LLMs) to various specialized domains without changing the model’s internal structure. In traditional adaptation methods, the model’s weights are typically updated through fine-tuning or extended with new layers. In contrast, Tag-LLM operates solely through input-level tags that are added to the embedding layer.
 
@@ -100,7 +96,6 @@ These tags are inserted directly into the model’s input embeddings and carry t
 As a result, the core architecture of the model remains completely frozen throughout the process. All adaptation is instead handled through the learnable tag embeddings that are added at the input level. This design allows the model to flexibly adapt to a wide range of new tasks without requiring any retraining or modification of its internal parameters.
 
 By conditioning the model through these lightweight and modular tags—rather than altering its internals—Tag-LLM enables a powerful yet efficient form of specialization. This greatly reduces training cost while preserving the generalization strength of the original LLM.
-
 
 ## How Are Tags Trained? A Three-Stage Learning Strategy
 Tag-LLM follows a three-stage hierarchical training protocol to adapt general-purpose large language models (LLMs) to specific domains and tasks. Through this approach, components with different functionalities, such as domain and function tags, are gradually learned from more general data to more specialized tasks.
@@ -226,7 +221,6 @@ Tag‑LLM achieved the lowest error rates (MSE) in both the QED and descriptor t
 
 ![](/images/case_study_2.png)
 
-
 ### Case Study: Single-Domain, Multi-Instance Tasks
 The second scientific benchmark for Tag‑LLM involves a regression task based on multiple inputs: drug combination prediction. In this task, the model receives two SMILES sequences representing the chemical structures of two different drugs, both preceded by the ⟨SMILES⟩ domain tag. The model is guided to produce an output using the ⟨DC⟩ function tag.
 
@@ -285,7 +279,6 @@ As the tag length (p) increases, test error first decreases and then starts to r
 
 This finding suggests that introducing more parameters initially helps the model, but going too far can lead to issues like overfitting.
 
-
 ### How Does TAG-LLM Compare to Other Techniques?
 Finally, let’s take a look at how TAG-LLM performs against other PEFT (Parameter-Efficient Fine-Tuning) methods based on the results summarized in the table below:
 
@@ -320,8 +313,6 @@ Future Directions:
 ## Summary
 Tag‑LLM shows that large language models can be adapted to specialized scientific domains using simple input-level tags.  
 This lightweight method achieves strong performance with minimal training cost and preserves the generalization ability of general-purpose LLMs.  
-
----
 
 ## References
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
