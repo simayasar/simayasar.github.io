@@ -14,14 +14,13 @@ Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using onl
 This lightweight approach offers high performance at low cost and strong zero-shot generalization.
 </em></small>
 
-<small><em>**Who Should Read This?**</em></small>  
+<small><em>Who Should Read This?</em></small>  
 
-<small><em>
-This post is useful for:  
-- Students new to machine learning and deep learning  
-- Researchers interested in LLM applications in biology, chemistry, or medicine  
-- Engineers who want to solve scientific tasks without training models from scratch  
-</em></small>
+<small><em>This post is useful for:</em></small>  
+
+<small><em>• Students new to machine learning and deep learning</em></small>  
+<small><em>• Researchers interested in LLM applications in biology, chemistry, or medicine</em></small>  
+<small><em>• Engineers who want to solve scientific tasks without training models from scratch</em></small>
 
 
 ## Introduction
