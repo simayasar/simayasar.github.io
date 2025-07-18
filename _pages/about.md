@@ -8,17 +8,21 @@ redirect_from:
 
 
 ---
-## Abstract
-This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry. Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using only input-level tags (domain and task tags), without changing the model’s architecture. This lightweight approach offers high performance at low cost and strong zero-shot generalization.
+<small><em>
+This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry.  
+Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using only input-level tags (domain and task tags), without changing the model’s architecture.  
+This lightweight approach offers high performance at low cost and strong zero-shot generalization.
+</em></small>
 
-## Who Should Read This?
-This post is useful for:
+<small><em>**Who Should Read This?**</em></small>  
 
-Students new to machine learning and deep learning
+<small><em>
+This post is useful for:  
 
-Researchers interested in LLM applications in biology, chemistry, or medicine
-
-Engineers who want to solve scientific tasks without training models from scratch
+- Students new to machine learning and deep learning  
+- Researchers interested in LLM applications in biology, chemistry, or medicine  
+- Engineers who want to solve scientific tasks without training models from scratch  
+</em></small>
 
 
 ## Introduction
@@ -314,6 +318,15 @@ Future Directions:
 ⏰ Applying Tag‑LLM to other scientific fields like biology, physics, or chemistry.
 
 ⏰ Exploring in-context learning to complement tag-based prompting.
+
+---
+
+<small><em>  
+**Summary:**  
+Tag‑LLM shows that large language models can be adapted to specialized scientific domains using simple input-level tags.  
+This lightweight method achieves strong performance with minimal training cost and preserves the generalization ability of general-purpose LLMs.  
+</em></small>
+
 
 ## References
 - [Tag-LLM: Repurposing General-Purpose LLMs for Specialized Domains (arXiv:2402.05140)](https://arxiv.org/abs/2402.05140)
