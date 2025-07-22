@@ -109,40 +109,61 @@ $xing-color                 : #006567;
   padding: 0 1rem;
 }
 
-/* === Modern Typography & Links === */
+
 body {
-  font-family: 'Segoe UI', $sans-serif; /* Daha modern bir sans-serif */
-  background-color: #fafafa;            /* Hafif arka plan */
-  color: #333;                          /* Okunaklı koyu gri metin */
+  font-family: 'Segoe UI', $sans-serif; 
+  background-color: #fafafa;            
+  color:#37474F;                       
 }
 
 a {
-  color: $linkedin-color;               /* Var olan LinkedIn mavisini link rengi olarak kullan */
+  color: $linkedin-color;               
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  color: darken($linkedin-color, 10%);  /* Hover için biraz koyu tonu */
-}
+  color: darken($linkedin-color, 10%);  
 
-/* === Custom Text Alignment & Readability === */
+
 .page__content p {
-  text-align: justify;       /* Yazıları iki yana yasla */
-  line-height: 1.7;          /* Satır aralığını eşitle */
-  margin-top: 0;             /* Fazla boşlukları kaldır */
-  margin-bottom: 1em;        /* Standart paragraf boşluğu */
-  font-size: $type-size-5;   /* 16px (isteğe göre $type-size-4 = ~20px de olur) */
+  text-align: justify;       
+  margin-top: 0;            
+  margin-bottom: 1em;        
+  font-size: $type-size-5;   
   font-family: $global-font-family;
 }
 
 .page__content strong {
-  display: inline;           /* Kalın yazıları hizalı tutar */
+  display: inline;          
 }
 
 .page__content h2, 
 .page__content h3 {
-  margin-top: 1.5em;         /* Başlıktan önce boşluk */
-  margin-bottom: 0.5em;      /* Başlıktan sonra az boşluk */
+  margin-top: 1.5em;        
+  margin-bottom: 0.5em;    
   font-family: $header-font-family;
+}
+}
+
+.quick-navigation {
+  max-width: 220px;
+  font-size: 0.85em;
+  line-height: 1.4;
+  background: #f7f7f7;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  position: absolute;
+  left: 2rem;
+  top: 8rem;
+}
+
+.quick-navigation a {
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.quick-navigation a:hover {
+  color: #0077b6;
 }
