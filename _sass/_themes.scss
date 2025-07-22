@@ -103,44 +103,46 @@ $vine-color                 : #00bf8f;
 $youtube-color              : #bb0000;
 $xing-color                 : #006567;
 
-
-/* --- Custom CV Layout Styles --- */
-.cv-header-nav {
-  padding: 1rem 0;
-  text-align: center;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #f2f2f2;
+.page__content {
+  max-width: 900px;         
+  margin: 0 auto;            
+  padding: 0 1rem;
 }
 
-.cv-header-nav .home-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #2a7ae2;
-  color: white;
+/* === Modern Typography & Links === */
+body {
+  font-family: 'Segoe UI', $sans-serif; /* Daha modern bir sans-serif */
+  background-color: #fafafa;            /* Hafif arka plan */
+  color: #333;                          /* Okunaklı koyu gri metin */
+}
+
+a {
+  color: $linkedin-color;               /* Var olan LinkedIn mavisini link rengi olarak kullan */
   text-decoration: none;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.2s;
+  transition: color 0.2s ease-in-out;
 }
 
-.cv-header-nav .home-button:hover {
-  background-color: #1756a9;
+a:hover {
+  color: darken($linkedin-color, 10%);  /* Hover için biraz koyu tonu */
 }
 
-.cv-container {
-  max-width: 1000px;
-  margin: 0 auto;
+/* === Custom Text Alignment & Readability === */
+.page__content p {
+  text-align: justify;       /* Yazıları iki yana yasla */
+  line-height: 1.7;          /* Satır aralığını eşitle */
+  margin-top: 0;             /* Fazla boşlukları kaldır */
+  margin-bottom: 1em;        /* Standart paragraf boşluğu */
+  font-size: $type-size-5;   /* 16px (isteğe göre $type-size-4 = ~20px de olur) */
+  font-family: $global-font-family;
 }
 
-.cv-download-links {
-  margin-top: 2rem;
-  text-align: center;
-  padding: 1rem;
-  border-top: 1px solid #f2f2f2;
+.page__content strong {
+  display: inline;           /* Kalın yazıları hizalı tutar */
 }
 
-.cv-download-links a {
-  margin: 0 0.5rem;
+.page__content h2, 
+.page__content h3 {
+  margin-top: 1.5em;         /* Başlıktan önce boşluk */
+  margin-bottom: 0.5em;      /* Başlıktan sonra az boşluk */
+  font-family: $header-font-family;
 }
