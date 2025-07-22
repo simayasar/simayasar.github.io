@@ -41,15 +41,6 @@ Below, we will explore the basic building blocks of this method: how the tags ar
 
 ![](/images/tag_llm_method.png)
 
-graph TD
-    A[Input Data] --> B[Domain Tag <Protein>, <SMILES> ...]
-    A --> C[Function Tag <CLS>, <BA>, <QED> ...]
-    B --> D[Embedding Layer]
-    C --> D
-    D --> E[Transformer Layers (Frozen LLM)]
-    E --> F[Task Output]
-    F --> |Text or Numerical| G[Regression Head (if needed)]
-
 
 ## Soft Tag Structure
 One of the core components of Tag-LLM is its soft tagging mechanism. Instead of using hard-coded text tokens, tags are represented as learnable continuous embeddings. Each tag is essentially a special vector that encodes semantic information and is directly inserted into the model’s input embedding layer.
