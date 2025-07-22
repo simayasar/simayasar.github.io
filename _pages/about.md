@@ -221,7 +221,9 @@ In these tasks, the inputs are not plain text — they consist of domain-specifi
 
 Input: The protein sequence is ⟨Protein⟩  
 Output: The descriptor value is ⟨Descriptor⟩
+
 --
+
 Input: The SMILES of the molecule is ⟨SMILES⟩  
 Output: The quantitative estimate of druglikeness is ⟨QED⟩
 
