@@ -109,38 +109,40 @@ $xing-color                 : #006567;
   padding: 0 1rem;
 }
 
-
+/* === Modern Typography & Links === */
 body {
   font-family: 'Segoe UI', $sans-serif; 
   background-color: #fafafa;            
-  color:#89c6e5;                       
+  color:#37474F;                       
 }
 
 a {
-  color: $linkedin-color;               
+  color: $linkedin-color;               /* Var olan LinkedIn mavisini link rengi olarak kullan */
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  color: darken($linkedin-color, 10%);  
+  color: darken($linkedin-color, 10%);  /* Hover için biraz koyu tonu */
+}
 
-
+/* === Custom Text Alignment & Readability === */
 .page__content p {
-  text-align: justify;       
-  margin-top: 0;            
-  margin-bottom: 1em;        
-  font-size: $type-size-5;   
+  text-align: justify;       /* Yazıları iki yana yasla */
+  line-height: 1.7;          /* Satır aralığını eşitle */
+  margin-top: 0;             /* Fazla boşlukları kaldır */
+  margin-bottom: 1em;        /* Standart paragraf boşluğu */
+  font-size: $type-size-5;   /* 16px (isteğe göre $type-size-4 = ~20px de olur) */
   font-family: $global-font-family;
 }
 
 .page__content strong {
-  display: inline;          
+  display: inline;           /* Kalın yazıları hizalı tutar */
 }
 
 .page__content h2, 
 .page__content h3 {
-  margin-top: 1.5em;        
-  margin-bottom: 0.5em;    
+  margin-top: 1.5em;         /* Başlıktan önce boşluk */
+  margin-bottom: 0.5em;      /* Başlıktan sonra az boşluk */
   font-family: $header-font-family;
 }
