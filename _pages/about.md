@@ -8,6 +8,36 @@ redirect_from:
 
 
 ---
+### Quick Navigation
+- [Who Should Read This?](#who-should-read-this)
+- [Introduction](#introduction)
+- [Why Does This Problem Matter?](#why-does-this-problem-matter)
+- [Method: What is Tag-LLM and How Does it Work?](#method-what-is-tag-llm-and-how-does-it-work)
+  - [Soft Tag Structure](#soft-tag-structure)
+  - [Integration into Embedding](#integration-into-embedding)
+  - [How Do Tags Interact with the Model Architecture?](#how-do-tags-interact-with-the-model-architecture)
+  - [How Are Tags Trained? A Three-Stage Learning Strategy](#how-are-tags-trained-a-three-stage-learning-strategy)
+    - [Stage 1: Learning Domain Tags](#stage-1-learning-domain-tags)
+    - [Stage 2 & 3: Learning Function Tags](#stage-2--3-learning-function-tags)
+  - [What If the Output Isn’t Text?](#what-if-the-output-isnt-text)
+  - [How Does This Compare to Prior Work?](#how-does-this-compare-to-prior-work)
+- [Experimental Success](#experimental-success-how-well-does-a-multilingual-translation-task-work)
+  - [Multilingual Translation Task](#experimental-success-how-well-does-a-multilingual-translation-task-work)
+  - [Can LLMs Handle Scientific Tasks Too?](#experimental-success-can-llms-handle-scientific-tasks-too)
+    - [Case Study: Single-Domain, Single-Instance Tasks](#case-study-single-domain-single-instance-tasks)
+    - [Case Study: Single-Domain, Multi-Instance Tasks](#case-study-single-domain-multi-instance-tasks)
+    - [Case Study: Multi-Domain, Multi-Instance Tasks](#case-study-multi-domain-multi-instance-tasks)
+- [Why Is Tag-LLM So Effective?](#why-is-tag-llm-so-effective)
+  - [The Contribution of Tags and the Regression Head](#the-contribution-of-tags-and-the-regression-head)
+  - [Effect of Tag Length](#effect-of-tag-length)
+  - [How Does TAG-LLM Compare to Other Techniques?](#how-does-tag-llm-compare-to-other-techniques)
+- [Conclusion and Future Work](#conclusion-and-future-work)
+- [References](#references)
+
+
+
+
+
 <small><em>
 This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry.  
 Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using only input-level tags (domain and task tags), without changing the model’s architecture.  
@@ -318,10 +348,11 @@ Exploring hybrid strategies (e.g., tag-based prompting + in-context demonstratio
 
 ## References
 - [1] Shen, Junhong, Tenenholtz, Neil, Hall, James Brian, Alvarez-Melis, David, & Fusi, Nicolo. (2024). Tag-LLM: Repurposing general-purpose LLMS for specialized domains ([arXiv](https://arxiv.org/abs/2402.05140))
-- [2] Hu, J. E., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang,S., and Chen, W. LoRA: Low-rank adaptation of large
-language models. arXiv preprint arXiv:2106.09685, 2021.
-- [3] Lester, B., Al-Rfou, R., and Constant, N. The power of scale  for parameter-efficient prompt tuning. arXiv preprint arXiv:2104.08691, 2021.
 
+- [2] Hu, J. E., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang,S., and Chen, W. LoRA: Low-rank adaptation of large
+language models. ([arXiv](https://arxiv.org/abs/2106.09685)), 2021.
+
+- [3] Lester, B., Al-Rfou, R., and Constant, N. The power of scale  for parameter-efficient prompt tuning. ([arXiv](https://arxiv.org/abs/2104.08691)), 2021.
 
 
 
