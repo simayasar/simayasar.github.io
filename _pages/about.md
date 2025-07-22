@@ -15,12 +15,10 @@ redirect_from:
 - [Who Should Read This?](#who-should-read-this)
 - [Introduction](#introduction)
 - [Why Does This Problem Matter?](#why-does-this-problem-matter)
-...
 
 </div>
 
-
-
+---
 
 <small><em>
 This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry.  
