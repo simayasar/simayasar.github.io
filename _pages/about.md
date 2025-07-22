@@ -8,18 +8,6 @@ redirect_from:
 
 
 ---
-
-<div class="quick-navigation">
-
-### Quick Navigation
-- [Who Should Read This?](#who-should-read-this)
-- [Introduction](#introduction)
-- [Why Does This Problem Matter?](#why-does-this-problem-matter)
-
-</div>
-
----
-
 <small><em>
 This post explains how large language models (LLMs) can be adapted to specialized domains such as biology and chemistry.  
 Tag‑LLM enables general-purpose LLMs to handle domain-specific tasks using only input-level tags (domain and task tags), without changing the model’s architecture.  
